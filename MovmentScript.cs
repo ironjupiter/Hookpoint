@@ -15,12 +15,12 @@ public class MovmentScript : MonoBehaviour
     void Update()
     {
         Vector2 v2 = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
+        
         if (rb.velocity.magnitude > 5f) {
             return;
         }
-
-        rb.AddForce(v2 * 5);
+        rb.AddRelativeForce(v2 * 5);
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
