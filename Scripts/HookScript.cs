@@ -7,16 +7,23 @@ public class HookScript : MonoBehaviour
     public GameObject player;
     private float timer = 3;
     private float time;
+    private float dmg = 2;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Enemy") {
+        if (collision.tag == "Attachable") {
             collision.GetComponent<SpringJoint2D>().enabled = true;
             collision.GetComponent<SpringJoint2D>().enableCollision = true;
             collision.GetComponent<SpringJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
             collision.GetComponent<SpringJoint2D>().distance = 0;
+            collision.GetComponent<HealthSystem>().changeHealth(-dmg);
             Object.Destroy(this.gameObject);
             return;
+        }
+
+        if (collision.tag == "Unattachable") 
+        {
+            Object.Destroy(this.gameObject);
         }
 
         if (collision.tag != "Player")

@@ -9,6 +9,9 @@ public class GrappleScript : MonoBehaviour
     public GameObject hook_pf;
     bool fired = false;
 
+    float fire_rate = 2f;
+    float fire_timer;
+
     void Start()
     {
         
@@ -19,8 +22,7 @@ public class GrappleScript : MonoBehaviour
     {
         Vector2 v2 = new Vector2(Input.mousePosition.x - Screen.width/2 , 
             Input.mousePosition.y - Screen.height / 2);
-        Debug.Log(v2);
-
+       
         if (Input.GetAxis("Fire1") != 0 && !fired)
         {
             fired = true;
@@ -30,9 +32,14 @@ public class GrappleScript : MonoBehaviour
             float force_multiplier = 1000;
             hook.GetComponent<Rigidbody2D>().AddForce(v2.normalized * force_multiplier);
         }
-        else if (Input.GetAxis("Fire1") == 0)
+        else if (Input.GetAxis("Fire1") == 0 && fire_timer > fire_rate)
         {
             fired = false;
+            fire_timer = 0;
+        }
+        else if (fired == true)
+        {
+            fire_timer += Time.deltaTime;
         }
     }
 }
