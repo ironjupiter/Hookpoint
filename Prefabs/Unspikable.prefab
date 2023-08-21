@@ -113,8 +113,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d920e1449aad3f488b46c6308d46e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  can_be_rammed: 0
-  ramming_dmg: 0
+  can_be_rammed: 1
+  can_ram_player: 1
+  can_ram_unattached: 0
+  can_ram_attached: 0
+  ramming_dmg: 5
 --- !u!50 &3129865334590609240
 Rigidbody2D:
   serializedVersion: 4

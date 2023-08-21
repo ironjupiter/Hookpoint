@@ -5,41 +5,44 @@ using UnityEngine;
 public class RammingBehavior : MonoBehaviour
 {
     public bool can_be_rammed = false;
+    public bool can_ram_player = false;
+    public bool can_ram_unattached = false;
+    public bool can_ram_attached = false;
+    
+    
     public float ramming_dmg = 0;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (can_be_rammed == true && collision.gameObject.tag == "Player") 
+        if (this.can_be_rammed == false)
         {
-            if (this.gameObject.tag == "Unattachable") 
-            {
-                return;
-            }
-
-            this.GetComponent<HealthSystem>().
-                changeHealth(-collision.gameObject.GetComponent<RammingBehavior>().ramming_dmg);
-
             return;
         }
 
-
-        if (can_be_rammed == true)
+        if (this.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<RammingBehavior>().can_ram_player)
         {
-            this.GetComponent<HealthSystem>().
-                changeHealth(-collision.gameObject.GetComponent<RammingBehavior>().ramming_dmg);
+            this.GetComponent<HealthSystem>().changeHealth(-collision.gameObject.GetComponent<RammingBehavior>().ramming_dmg);
+        } 
+        else if(this.gameObject.CompareTag("Unattachable") && collision.gameObject.GetComponent<RammingBehavior>().can_ram_unattached)
+        {
+            this.GetComponent<HealthSystem>().changeHealth(-collision.gameObject.GetComponent<RammingBehavior>().ramming_dmg);
+        } 
+        else if (this.gameObject.CompareTag("Attachable") && collision.gameObject.GetComponent<RammingBehavior>().can_ram_attached)
+        {
+            this.GetComponent<HealthSystem>().changeHealth(-collision.gameObject.GetComponent<RammingBehavior>().ramming_dmg);
         }
     }
 }

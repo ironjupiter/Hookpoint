@@ -24,6 +24,6 @@ public class HealthSystem : MonoBehaviour
     public void changeHealth(float deltaHealth) 
     {
         health = health + deltaHealth;
-        //Debug.Log(health + "health");
+        Debug.Log(this.gameObject.name + " health: "+ health);
     }
 }
