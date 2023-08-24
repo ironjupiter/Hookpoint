@@ -35,14 +35,17 @@ public class RammingBehavior : MonoBehaviour
         if (this.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<RammingBehavior>().can_ram_player)
         {
             this.GetComponent<HealthSystem>().changeHealth(-collision.gameObject.GetComponent<RammingBehavior>().ramming_dmg);
+            this.GetComponent<ForcedPush>().pushObj(collision.transform.GetComponent<ForcedPush>().force, collision.gameObject);
         } 
         else if(this.gameObject.CompareTag("Unattachable") && collision.gameObject.GetComponent<RammingBehavior>().can_ram_unattached)
         {
             this.GetComponent<HealthSystem>().changeHealth(-collision.gameObject.GetComponent<RammingBehavior>().ramming_dmg);
+            this.GetComponent<ForcedPush>().pushObj(collision.transform.GetComponent<ForcedPush>().force, collision.gameObject);
         } 
         else if (this.gameObject.CompareTag("Attachable") && collision.gameObject.GetComponent<RammingBehavior>().can_ram_attached)
         {
             this.GetComponent<HealthSystem>().changeHealth(-collision.gameObject.GetComponent<RammingBehavior>().ramming_dmg);
+            this.GetComponent<ForcedPush>().pushObj(collision.transform.GetComponent<ForcedPush>().force, collision.gameObject);
         }
     }
 }

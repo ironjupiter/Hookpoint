@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -159094314201315368}
   - component: {fileID: 3129865334590609243}
   - component: {fileID: -8070644552347391088}
+  - component: {fileID: 2610344805588983015}
   - component: {fileID: 3129865334590609240}
   - component: {fileID: 3129865334590609241}
   m_Layer: 0
@@ -49,6 +50,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
+  healing_factor: 2
+  player: {fileID: 0}
+  isPlayer: 0
+  health_drain: 0
 --- !u!212 &3129865334590609243
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -118,6 +123,19 @@ MonoBehaviour:
   can_ram_unattached: 0
   can_ram_attached: 0
   ramming_dmg: 5
+--- !u!114 &2610344805588983015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3129865334590609244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df19728ac69ed984db4f385a60f190fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 0
 --- !u!50 &3129865334590609240
 Rigidbody2D:
   serializedVersion: 4

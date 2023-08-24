@@ -14,7 +14,7 @@ public class MovmentScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         MovementBasic();
     }
@@ -30,7 +30,7 @@ public class MovmentScript : MonoBehaviour
         {
             return;
         }
-        rb.AddRelativeForce(v2 * 5);
+        rb.AddRelativeForce(v2 * 15);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
