@@ -48,4 +48,9 @@ public class RammingBehavior : MonoBehaviour
             this.GetComponent<ForcedPush>().pushObj(collision.transform.GetComponent<ForcedPush>().force, collision.gameObject);
         }
     }
+
+    public void changeRammingDMG(float delta)
+    {
+        ramming_dmg += delta;
+    }
 }

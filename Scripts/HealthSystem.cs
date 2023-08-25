@@ -8,6 +8,7 @@ public class HealthSystem : MonoBehaviour
 {
 
     public float health = 10;
+    private float default_health = 10;
     public float healing_factor = 0;
 
     public GameObject player;
@@ -37,7 +38,19 @@ public class HealthSystem : MonoBehaviour
 
     public void changeHealth(float deltaHealth) 
     {
-        health = health + deltaHealth;
-        Debug.Log(this.gameObject.name + " health: "+ health);
+        if (deltaHealth + health < default_health)
+        {
+            health = health + deltaHealth;
+            Debug.Log(this.gameObject.name + " health: " + health);
+        }
+        else
+        {
+            health = default_health;
+        }
+    }
+    
+    public void changeBaseHealth(float deltaHealth)
+    {
+        default_health += deltaHealth;
     }
 }

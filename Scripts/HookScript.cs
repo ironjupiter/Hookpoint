@@ -44,4 +44,14 @@ public class HookScript : MonoBehaviour
             Object.Destroy(this.gameObject);
         }
     }
+
+    public void changeTimer(float alpha)
+    {
+        timer = alpha;
+    }
+    
+    public void changeHookDMG(float alpha)
+    {
+        dmg = alpha;
+    }
 }

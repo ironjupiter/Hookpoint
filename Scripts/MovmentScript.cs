@@ -5,8 +5,13 @@ using UnityEngine;
 public class MovmentScript : MonoBehaviour
 {
     Rigidbody2D rb;
-    float walk_speed = 5f;
-    float run_speed = 10f;
+    float walk_speed = 15f;
+    float dash_force = 1000f;
+
+    private float dash_timer = 1f;
+    private float current_time = 0;
+    private bool has_dashed = false;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -21,16 +26,49 @@ public class MovmentScript : MonoBehaviour
 
     public void MovementBasic() {
         Vector2 v2 = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
+        
+        Xmovement(x);
+        Ymovement(y);
+        
+        dash(x, y);
+    }
 
-        if (rb.velocity.magnitude > walk_speed && Input.GetAxis("Run") == 0)
+    private void dash(float x, float y)
+    {
+        if (Input.GetAxis("Run") != 0 && !has_dashed)
         {
-            return;
+            rb.AddForce(new Vector2(x,y) * dash_force);
+            has_dashed = true;
         }
-        else if (rb.velocity.magnitude > run_speed) 
+
+        if (has_dashed)
         {
-            return;
+            current_time += Time.deltaTime;
         }
-        rb.AddRelativeForce(v2 * 15);
+
+        if (current_time > dash_timer && Input.GetAxis("Run") == 0)
+        {
+            current_time = 0;
+            has_dashed = false;
+        }
+    }
+
+    private void Xmovement(float x)
+    {
+        if ((walk_speed < this.GetComponent<Rigidbody2D>().velocity.x && this.GetComponent<Rigidbody2D>().velocity.x/x < 0) || (walk_speed > this.GetComponent<Rigidbody2D>().velocity.x))
+        {
+            this.GetComponent<Rigidbody2D>().AddForce(new Vector2(x*walk_speed, 0));
+        }
+    }
+
+    private void Ymovement(float y)
+    {
+        if ((walk_speed < this.GetComponent<Rigidbody2D>().velocity.y && this.GetComponent<Rigidbody2D>().velocity.y/y < 0) || (walk_speed > this.GetComponent<Rigidbody2D>().velocity.y))
+        {
+            this.GetComponent<Rigidbody2D>().AddForce(new Vector2(0*walk_speed, y*walk_speed));
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -47,4 +85,6 @@ public class MovmentScript : MonoBehaviour
             Object.Destroy(collision.gameObject);
         }
     }
+    
+    //public void change
 }
