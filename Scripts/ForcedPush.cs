@@ -27,5 +27,7 @@ public class ForcedPush : MonoBehaviour
 
         Vector2 v2 = -go.gameObject.transform.position + this.gameObject.transform.position;
         this.gameObject.GetComponent<Rigidbody2D>().AddForceAtPosition(force*v2.normalized*go.GetComponent<Rigidbody2D>().mass, go.gameObject.transform.position);
+        go.gameObject.GetComponent<Rigidbody2D>().AddForceAtPosition(-force*v2.normalized*go.GetComponent<Rigidbody2D>().mass, this.gameObject.transform.position);
+
     }
 }
