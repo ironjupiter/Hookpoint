@@ -32,10 +32,17 @@ public class RammingBehavior : MonoBehaviour
             return;
         }
 
+        if (collision.gameObject.CompareTag("Player") == true && 
+            (this.gameObject.CompareTag("Unattachable") || this.gameObject.GetComponent<SpringJoint2D>().enabled == false))
+        {
+            Debug.Log(this.gameObject.tag + " : no bounce");
+            return;
+        }
+
         if (this.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<RammingBehavior>().can_ram_player)
         {
             this.GetComponent<HealthSystem>().changeHealth(-collision.gameObject.GetComponent<RammingBehavior>().ramming_dmg);
-            this.GetComponent<ForcedPush>().pushObj(collision.transform.GetComponent<ForcedPush>().force, collision.gameObject);
+            //this.GetComponent<ForcedPush>().pushObj(collision.transform.GetComponent<ForcedPush>().force, collision.gameObject);
         } 
         else if(this.gameObject.CompareTag("Unattachable") && collision.gameObject.GetComponent<RammingBehavior>().can_ram_unattached)
         {

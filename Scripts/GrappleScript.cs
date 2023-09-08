@@ -30,6 +30,7 @@ public class GrappleScript : MonoBehaviour
             hook.transform.position = this.transform.position;
             hook.GetComponent<HookScript>().player = this.gameObject;
             hook.GetComponent<HookScript>().changeTimer(fire_rate);
+            hook.transform.rotation = this.transform.rotation;
             float force_multiplier = 2500;
             hook.GetComponent<Rigidbody2D>().AddForce(v2.normalized * force_multiplier);
         }

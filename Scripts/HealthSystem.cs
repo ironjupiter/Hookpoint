@@ -8,7 +8,7 @@ public class HealthSystem : MonoBehaviour
 {
 
     public float health = 10;
-    private float default_health = 10;
+    private float default_health = 40;
     public float healing_factor = 0;
 
     public GameObject player;

@@ -11,10 +11,16 @@ public class HookScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.tag == "Player")
+        {
+            return;
+        }
+
         if (collision.tag == "Attachable") {
             collision.GetComponent<SpringJoint2D>().enabled = true;
             collision.GetComponent<SpringJoint2D>().enableCollision = true;
             collision.GetComponent<SpringJoint2D>().connectedBody = player.GetComponent<Rigidbody2D>();
+            collision.GetComponent<SpringJoint2D>().autoConfigureDistance = false;
             collision.GetComponent<SpringJoint2D>().distance = 0;
             collision.GetComponent<HealthSystem>().changeHealth(-dmg);
             Object.Destroy(this.gameObject);
@@ -39,8 +45,19 @@ public class HookScript : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetAxis("Fire2") != 0) {
+            Object.Destroy(this.gameObject);
+        }
+    
+        if (this.GetComponent<SpringJoint2D>().enabled == true)
+        {
+            this.GetComponent<SpringJoint2D>().autoConfigureDistance = false;
+            this.GetComponent<SpringJoint2D>().distance = 0;
+            return;
+        }
+
         time += Time.deltaTime;
-        if (time > timer || Input.GetAxis("Fire2") != 0) {
+        if (time > timer) {
             Object.Destroy(this.gameObject);
         }
     }
